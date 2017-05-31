@@ -1,0 +1,13 @@
+dmidecode
+physical memory array
+probar ram
+	memtest
+	stream
+github stream-scaling
+\timing 
+SELECT SUM(generate_series) FROM generate_series(1,10000000);
+hot spare disco de respaldo
+wal postgres
+nano /var/lib/postgresql/9.4/main/
+
+
