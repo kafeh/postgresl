@@ -9,5 +9,16 @@ SELECT SUM(generate_series) FROM generate_series(1,10000000);
 hot spare disco de respaldo
 wal postgres
 nano /var/lib/postgresql/9.4/main/
+archivo donde escribe wal pg_xlog
+
+/var/lib/postgresql/9.4/main/ aca datos
+
+
+RL 	USO		DISCOS
+10	Datos 	8/12
+0	WAL		2
+1	SO		2
+
+QUE PASA SI TODO ES UN SOLO ARERGLO NIVEL 10 MEJOR O PEOR PERFORMANCE
 
 
