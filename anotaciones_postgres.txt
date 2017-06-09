@@ -21,4 +21,55 @@ RL 	USO		DISCOS
 
 QUE PASA SI TODO ES UN SOLO ARERGLO NIVEL 10 MEJOR O PEOR PERFORMANCE
 
+INSTALAR postgresql-contrib
+pgbench para ponerle stres a la base de datos.
+pgbench -i(inicializa) -s (scale) 
+pgbench -i -s 100 -d biblioteca
+psql -d biblioteca
+\d pgbench_accounts
+select * from pgbench_accounts limit 100;
+explain analyze select * from pgbench_accounts limit 100;
+caliente y frio  hot ya esta en cache. 
+consultas por lo menos se prueba tres veces
+explain analyze  select * from pgbench_accounts where aid=555;
+explain analyze select * from pgbench_accounts where aid>100 AND aid < 1000;
+Comparar entre uso de indices y no 
+prepare  sent(int) as select count(*) from pgbench_accounts where aid=555 AND bid=$1; 
+$1 primer parametro en este caso int
+explain execute sent(1);
+create index acc_bid ON pgbench_accounts(aid,bid);
+explain execute sent(1);
+prepare  sentbid(int) as select count(*) from pgbench_accounts where bid=$1; 
+explain execute sentbid(1);
+clustered index, hace index clusterizados, es decir ordena el indice ya que no se almacenan secuencial, el orden solo
+puede existir por una columna.
+INDICE NOMBRE UNICO
+
+
+estres a la base ver cuantas conexiones aguanta la base
+inicialmente en un solo thread
+pgbench -S -c 4 -t 20000 biblioteca
+pgbench -S -c 4 -T 5 (que podes hacer en 5 segs) biblicreoteca
+
+
+pagila base de datos de postgres
+dellstore2 (para pruebas de acido) wget http://pgfoundry.org/frs/download.php/543/dellstore2-normal-1.0.tar.gz
+createdb dellstore2
+psql -f /home/kari/Downloads/dellstore2-normal-1.0/dellstore2-normal-1.0.sql -d dellstore2
+createlang plpgsql dellstore2
+psql -d dellstore2 -c "VACUUM VERBOSE ANALYZE"
+select pg_size_pretty(pg_database_size('dellstore2')); saber espacio que ocupa mi base
+select pg_size_pretty(CAST(pg_relation_size('customers')/7.994*1000 as int8)) AS bytes_por_segundo;
+paramos postgres
+sync
+echo 3 > /proc/sys/vm/drop_caches 
+activamos timing
+select count(*) as costumers;
+
+
+
+
+
+
+
 
